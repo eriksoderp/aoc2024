@@ -7,7 +7,7 @@ def find_word(word, grid, directions):
     for (j, i), v in grid.items():
         if v == word[0]:
             for x, y in directions:
-                if all(grid.get((j+n*x, i+n*y)) == word[n] for n in range(1, len(word))):
+                if all(grid.get((j+(n+1)*x, i+(n+1)*y)) == c for n, c in enumerate(word[1:])):
                     results[(j+x, i+y)] += 1
     return results
 
