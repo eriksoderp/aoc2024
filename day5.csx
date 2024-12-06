@@ -45,11 +45,6 @@ int IsCorrectUpdate(string[] update)
     return update.SequenceEqual(correct_order) ? int.Parse(update[update.Length/2]) : 0;
 }
 
-var sorted = updates.Select(SortUpdate);
-foreach (var update in sorted)
-{
-    Console.WriteLine(string.Join(",", update));
-}
 // Part 1
 Console.WriteLine(updates.Select(IsCorrectUpdate).Sum());
 
