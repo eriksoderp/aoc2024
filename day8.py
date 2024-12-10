@@ -9,11 +9,9 @@ for pos, c in grid.items():
 
 def place_antinodes(antinodes, p1, p2, part2):
     d = p2 - p1
-    new_p1, new_p2 = p1, p2
-    while new_p1 in grid or new_p2 in grid:
-        new_p1 -= d; new_p2 += d
-        if new_p1 in grid: antinodes.add(new_p1)
-        if new_p2 in grid: antinodes.add(new_p2)
+    while p1 in grid or p2 in grid:
+        if (p1 := p1 - d) in grid: antinodes.add(p1)
+        if (p2 := p2 + d) in grid: antinodes.add(p2)
         if not part2: break
     return antinodes
 
