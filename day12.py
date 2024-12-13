@@ -33,7 +33,7 @@ def sides(region):
         if (d, pos) in accounted_for: continue
         original_pos = pos
         total_sides += 1
-        accounted_for.add(pos)
+        accounted_for.add((d, pos))
         while True:
             if (d, new_pos := pos + (d*1j)) in sides:
                 sides.remove((d, new_pos))
