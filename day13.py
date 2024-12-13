@@ -11,8 +11,7 @@ def solve(machine, to_add=0):
     solution = sp.solve([eq1, eq2], (a, b))
     a, b = solution[a], solution[b]
     if to_add == 0 and (a > 100 or b > 100): return 0
-    if a.is_integer and b.is_integer:
-        return a*3 + b
+    if a.is_integer and b.is_integer: return a*3 + b
     return 0
 
 # Part 1
