@@ -12,8 +12,7 @@ def is_in_region(pos, c):
 def construct_region(region, pos, c):
     region.add(pos)
     for d in directions:
-        if (new_pos := pos + d) in region: continue
-        if grid.get(new_pos) == c:
+        if (new_pos := pos + d) not in region and grid.get(new_pos) == c:
             region.update(construct_region(region, new_pos, c))
     return region
 
@@ -31,29 +30,22 @@ def sides(region):
     while sides:
         d, pos = sides.pop()
         if (d, pos) in accounted_for: continue
-        original_pos = pos
+        new_pos = pos
         total_sides += 1
         accounted_for.add((d, pos))
-        while True:
-            if (d, new_pos := pos + (d*1j)) in sides:
-                sides.remove((d, new_pos))
-                pos = new_pos
-                accounted_for.add((d, pos))
-            else: break
+        while (d, new_pos := new_pos + (d*1j)) in sides:
+            sides.remove((d, new_pos))
+            accounted_for.add((d, new_pos))
 
-        pos = original_pos
-        while True:
-            if (d, new_pos := pos + (d*-1j)) in sides:
-                sides.remove((d, new_pos))
-                pos = new_pos
-                accounted_for.add((d, pos))
-            else: break
+        new_pos = pos
+        while (d, new_pos := new_pos + (d*-1j)) in sides:
+            sides.remove((d, new_pos))
+            accounted_for.add((d, new_pos))
 
     return total_sides
 
-for pos, c in grid.items():
-    if not is_in_region(pos, c):
-        regions[c].append(construct_region(set(), pos, c))
+list(regions[c].append(construct_region(set(), pos, c)) for pos, c in grid.items()
+                                                        if not is_in_region(pos, c))
 
 # Part 1
 print(sum(area(r)*perimeter(r) for rs in regions.values() for r in rs))
