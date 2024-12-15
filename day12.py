@@ -26,19 +26,13 @@ def sides(region):
     sides = {(d, pos + d) for pos in region for d in directions if pos + d not in region}
 
     total_sides = 0
-    accounted_for = set()
-    while sides:
+    while sides and (total_sides := total_sides + 1):
         d, pos = sides.pop()
         new_pos = pos
-        total_sides += 1
-        while (d, new_pos := new_pos + (d*1j)) in sides:
-            sides.remove((d, new_pos))
-            accounted_for.add((d, new_pos))
+        while (d, new_pos := new_pos + (d*1j)) in sides: sides.remove((d, new_pos))
 
         new_pos = pos
-        while (d, new_pos := new_pos + (d*-1j)) in sides:
-            sides.remove((d, new_pos))
-            accounted_for.add((d, new_pos))
+        while (d, new_pos := new_pos + (d*-1j)) in sides: sides.remove((d, new_pos))
 
     return total_sides
 
