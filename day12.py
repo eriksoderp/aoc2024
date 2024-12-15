@@ -29,10 +29,8 @@ def sides(region):
     accounted_for = set()
     while sides:
         d, pos = sides.pop()
-        if (d, pos) in accounted_for: continue
         new_pos = pos
         total_sides += 1
-        accounted_for.add((d, pos))
         while (d, new_pos := new_pos + (d*1j)) in sides:
             sides.remove((d, new_pos))
             accounted_for.add((d, new_pos))
