@@ -34,5 +34,6 @@ i, point, decrease = 8**len(program), 0, 0
 while i := i - 8**decrease:
     registers[A], registers[B], registers[C] = i, 0, 0
     out = run(program)
-    if all(out[idx] == program[idx] for idx in range(point+1)): decrease += 1; point += 1
-    if out == program: print(i); break
+    if all(out[idx] == program[idx] for idx in range(point+1)): 
+        decrease += 1; point += 1
+        if point == len(program)-1: print(i); break
