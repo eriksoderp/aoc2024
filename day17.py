@@ -30,10 +30,10 @@ def run(program):
 print(','.join([str(i) for i in run(program)]))
 
 # Part 2
-i, point, decrease = 8**len(program), 0, 0
-while i := i - 8**decrease:
+i, point, power = 8**len(program), 0, 0
+while i := i - 8**power:
     registers[A], registers[B], registers[C] = i, 0, 0
     out = run(program)
     if all(out[idx] == program[idx] for idx in range(point+1)): 
-        decrease += 1; point += 1
+        power += 1; point += 1
         if point == len(program)-1: print(i); break
