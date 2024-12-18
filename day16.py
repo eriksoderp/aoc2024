@@ -1,8 +1,5 @@
-from math import inf
 from heapq import heappop, heappush
 from collections import defaultdict
-import sys
-sys.setrecursionlimit(10000)
 grid = {(j, i): c for i, row in enumerate(open('input16.txt').readlines())
                   for j, c in enumerate(row.strip())}
 add = lambda x, y, dir_x, dir_y: (x+dir_x, y+dir_y)
@@ -17,7 +14,7 @@ def flatten(nested_list):
             flattened_list.append(item)
     return flattened_list
 
-costs = defaultdict(lambda: inf)
+costs = defaultdict(lambda: float('inf'))
 paths = defaultdict(list)
 def dijkstra(grid, source, direction, target):
     q = [(0, source, direction, [source])]
