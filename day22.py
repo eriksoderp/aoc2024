@@ -1,4 +1,5 @@
 from collections import defaultdict
+from functools import reduce
 sns = open('input22.txt').read().strip().split('\n')
 
 def generate(sn):
@@ -25,10 +26,5 @@ def generate(sn):
     return sn
 
 sequence_map = defaultdict(int)
-s = 0
-for sn in sns:
-    sn = generate(int(sn))
-    s += sn
-
-print(s) # Part 1
+print(reduce(lambda s, sn: s + generate(int(sn)), sns, 0)) # Part 1
 print(k := max(sequence_map, key=sequence_map.get), sequence_map[k]) # Part 2
